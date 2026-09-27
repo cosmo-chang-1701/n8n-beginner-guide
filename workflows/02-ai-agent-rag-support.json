@@ -1,0 +1,161 @@
+{
+  "name": "02 - 智慧客服 AI Agent (RAG + HITL 人機審批)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "support-chat",
+        "options": {}
+      },
+      "id": "node-chat-in",
+      "name": "Chat Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "customer-support-webhook"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.body.userMessage }}",
+        "options": {
+          "systemMessage": "你是一家電商平台的專業客服專員。\\n1. 優先使用 search_faq 工具查詢退貨政策或技術支援。\\n2. 若使用者明確提出退款要求，詢問金額後調用 request_refund 工具。\\n3. 始終保持禮貌、專業，若知識庫無資訊則主動引導撥打客服專線。"
+        }
+      },
+      "id": "node-ai-agent",
+      "name": "Support AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [500, 300]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "node-llm-model",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [440, 520]
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "id": "node-memory-buffer",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [580, 520]
+    },
+    {
+      "parameters": {
+        "name": "search_faq",
+        "description": "當使用者詢問產品保固、出貨時間、退換貨條款時調用此工具檢索內部知識庫。"
+      },
+      "id": "node-rag-tool",
+      "name": "Vector Store FAQ Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [720, 520]
+    },
+    {
+      "parameters": {
+        "name": "request_refund",
+        "description": "當客戶提出退款要求時調用此工具。輸入參數需包含 order_id 與 refund_amount。"
+      },
+      "id": "node-tool-refund",
+      "name": "Workflow Refund Tool",
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [860, 520]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"reply\": \"{{ $json.output }}\",\n  \"sessionId\": \"{{ $('Chat Webhook').first().json.body.sessionId }}\",\n  \"timestamp\": \"{{ $now.toISO() }}\"\n}",
+        "options": {}
+      },
+      "id": "node-respond-chat",
+      "name": "Send AI Response",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [840, 300]
+    }
+  ],
+  "connections": {
+    "Chat Webhook": {
+      "main": [
+        [
+          {
+            "node": "Support AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Support AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send AI Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Support AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Support AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Vector Store FAQ Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "Support AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Refund Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "Support AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

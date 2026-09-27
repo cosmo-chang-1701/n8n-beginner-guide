@@ -1,0 +1,125 @@
+{
+  "name": "03 - DevOps 智慧事件響應與自愈工作流 (Sentry / Prometheus)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "incident-alert",
+        "options": {}
+      },
+      "id": "node-alert-webhook",
+      "name": "Alertmanager Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "devops-alert-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n\nreturn items.map((item, index) => {\n  const payload = item.json.body || item.json;\n  const alerts = payload.alerts || [payload];\n  \n  return {\n    json: {\n      alertCount: alerts.length,\n      status: payload.status || 'firing',\n      serviceName: alerts[0]?.labels?.service || 'api-gateway',\n      severity: alerts[0]?.labels?.severity || 'critical',\n      summary: alerts[0]?.annotations?.summary || '未定義異常描述',\n      fingerprint: alerts[0]?.fingerprint || 'fp-' + Date.now(),\n      receivedAt: new Date().toISOString()\n    },\n    pairedItem: { item: index }\n  };\n});"
+      },
+      "id": "node-parse-alert",
+      "name": "Parse Alert Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "cond-critical",
+              "leftValue": "={{ $json.severity }}",
+              "rightValue": "critical",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node-check-severity",
+      "name": "Is Critical Alert?",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "channel": "#incident-alerts",
+        "text": "=🚨 *【重大生產故障告警】*\n- *服務*: {{ $json.serviceName }}\n- *層級*: {{ $json.severity }}\n- *摘要*: {{ $json.summary }}\n- *觸發時間*: {{ $json.receivedAt }}\n- *警報指紋*: `{{ $json.fingerprint }}`\n\n_自動自愈評估中..._",
+        "options": {}
+      },
+      "id": "node-slack-notify",
+      "name": "Send Slack Alert",
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.2,
+      "position": [900, 200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://docker-proxy:2375/containers/worker-service/restart",
+        "options": {}
+      },
+      "id": "node-auto-remediation",
+      "name": "Auto-Restart Worker Pod",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [900, 400]
+    }
+  ],
+  "connections": {
+    "Alertmanager Webhook": {
+      "main": [
+        [
+          {
+            "node": "Parse Alert Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Alert Payload": {
+      "main": [
+        [
+          {
+            "node": "Is Critical Alert?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Critical Alert?": {
+      "main": [
+        [
+          {
+            "node": "Send Slack Alert",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Auto-Restart Worker Pod",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

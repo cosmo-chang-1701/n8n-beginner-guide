@@ -1,0 +1,17 @@
+{
+  "title": "n8n 2026 全方位實戰指南",
+  "description": "從零基礎入門到企業級 AI Agent 自動化編排",
+  "author": "Antigravity Engineering",
+  "language": "zh-tw",
+  "gitbook": ">=3.0.0",
+  "plugins": [
+    "-sharing",
+    "theme-default",
+    "search",
+    "fontsettings"
+  ],
+  "variables": {
+    "version": "2026.1",
+    "n8nVersion": "2.x/3.x"
+  }
+}

@@ -1,0 +1,28 @@
+# Dockerfile for validating n8n GitBook documentation and testing workflows
+FROM node:20-alpine
+
+WORKDIR /app
+
+# 安裝基本工具
+RUN apk add --no-cache bash curl git
+
+# 複製專案檔案
+COPY package.json ./
+COPY .gitbook.yaml ./
+COPY book.json ./
+COPY README.md ./
+COPY SUMMARY.md ./
+COPY scripts/ ./scripts/
+COPY workflows/ ./workflows/
+COPY docker/ ./docker/
+COPY 01-getting-started/ ./01-getting-started/
+COPY 02-core-concepts/ ./02-core-concepts/
+COPY 03-workflow-logic/ ./03-workflow-logic/
+COPY 04-api-and-integrations/ ./04-api-and-integrations/
+COPY 05-ai-agents-orchestration/ ./05-ai-agents-orchestration/
+COPY 06-devops-and-production/ ./06-devops-and-production/
+COPY 07-practical-cookbook/ ./07-practical-cookbook/
+COPY appendices/ ./appendices/
+
+# 執行驗證腳本
+CMD ["node", "scripts/validate_gitbook.js"]

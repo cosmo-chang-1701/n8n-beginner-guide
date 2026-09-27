@@ -1,0 +1,26 @@
+{
+  "name": "n8n-2026-definitive-guide",
+  "version": "1.0.0",
+  "description": "n8n 2026 全方位實戰指南：從零基礎入門到企業級 AI Agent 自動化編排 (GitBook 電子書)",
+  "main": "README.md",
+  "scripts": {
+    "validate": "node scripts/validate_gitbook.js",
+    "test": "npm run validate",
+    "build:honkit": "npx honkit build . dist",
+    "serve:honkit": "npx honkit serve"
+  },
+  "keywords": [
+    "n8n",
+    "automation",
+    "ai-agent",
+    "gitbook",
+    "workflow",
+    "docker",
+    "devops"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT",
+  "devDependencies": {
+    "honkit": "^6.0.2"
+  }
+}
