@@ -1,0 +1,53 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: n8n 2026 全方位實戰指南
+  structure:
+    - type: space
+      key: space-getting-started
+      title: 第一篇：邁入現代自動化世界
+      path: getting-started
+      default: true
+      content:
+        directory: ./01-getting-started
+    - type: space
+      key: space-core-concepts
+      title: 第二篇：n8n 核心觀念與資料流架構
+      path: core-concepts
+      content:
+        directory: ./02-core-concepts
+    - type: space
+      key: space-workflow-logic
+      title: 第三篇：邏輯控制與資料轉換實戰
+      path: workflow-logic
+      content:
+        directory: ./03-workflow-logic
+    - type: space
+      key: space-api-and-integrations
+      title: 第四篇：外部整合與 API 通訊
+      path: api-and-integrations
+      content:
+        directory: ./04-api-and-integrations
+    - type: space
+      key: space-ai-agents-orchestration
+      title: 第五篇：2026 現代 AI Agent 與智慧編排
+      path: ai-agents-orchestration
+      content:
+        directory: ./05-ai-agents-orchestration
+    - type: space
+      key: space-devops-and-production
+      title: 第六篇：生產環境運維與企業級架構
+      path: devops-and-production
+      content:
+        directory: ./06-devops-and-production
+    - type: space
+      key: space-practical-cookbook
+      title: 第七篇：企業實戰專案食譜
+      path: practical-cookbook
+      content:
+        directory: ./07-practical-cookbook
+    - type: space
+      key: space-appendices
+      title: 附錄
+      path: appendices
+      content:
+        directory: ./appendices
