@@ -18,8 +18,8 @@
     "docker",
     "devops"
   ],
-  "author": "Antigravity Engineering",
-  "license": "MIT",
+  "author": "Cosmo Chang <cosmo.chang1701@gmail.com>",
+  "license": "CC-BY-NC-4.0 AND MIT",
   "devDependencies": {
     "honkit": "^6.0.2"
   }

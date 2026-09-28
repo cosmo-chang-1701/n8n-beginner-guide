@@ -1,0 +1,59 @@
+# Licensing Terms
+
+This repository uses a dual-licensing model to balance open-source technical collaboration with intellectual property protection for written educational content.
+
+---
+
+## 1. Documentation & Educational Content (電子書與教材內容)
+
+> 本作品內容由 AI 輔助全面生成，並由專案發起人進行架構設計與彙整發布。本作品採用 創用 CC 姓名標示-非商業性 4.0 國際授權條款 (CC BY-NC 4.0) 與 MIT 授權條款釋出。
+
+All written guides, chapters, diagrams, illustrations, and documentation files (`*.md`) in this repository are licensed under:
+
+**Creative Commons Attribution-NonCommercial 4.0 International Public License (CC BY-NC 4.0)**
+
+Copyright (c) 2026 Cosmo Chang.
+
+### Summary of Rights and Restrictions:
+- **Share**: You are free to copy and redistribute the material in any medium or format.
+- **Adapt**: You are free to remix, transform, and build upon the material.
+- **Under the following terms**:
+  - **Attribution (BY)**: You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+  - **NonCommercial (NC)**: You may not use the material for commercial purposes (including, but not limited to, selling printed copies, publishing on paywalled platforms, or packaging as paid courses without explicit written permission from the copyright holder).
+
+For full license text, visit: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+---
+
+## 2. Source Code, Workflows & Configurations (範例代碼、工作流程與配置)
+
+All workflow JSON files located in `workflows/`, Docker configurations located in `docker/`, automation scripts located in `scripts/`, and executable code snippets within markdown blocks are licensed under:
+
+**The MIT License (MIT)**
+
+Copyright (c) 2026 Cosmo Chang
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## 3. Disclaimers & Trademarks (免責與商標聲明)
+
+- **Technical Disclaimer**: The sample workflows, configurations, and code snippets in this repository are provided for educational and research purposes only. Users must thoroughly test and validate them in staging environments before applying them to production systems. The authors and contributors assume no liability for direct or indirect operational damages.
+- **Trademark Notice**: `n8n` is a registered trademark of n8n GmbH. This repository is an independent, community-driven educational guide and is not affiliated with, sponsored by, or endorsed by n8n GmbH.

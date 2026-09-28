@@ -3,7 +3,8 @@
 > **Definitive Guide to n8n Automation & AI Agent Orchestration (2026 Edition)**  
 > 適用版本：`n8n v2.x` / `v3.x` 生產標準 ｜ 部署標準：Docker & Docker Compose ｜ 繁體中文開源規範
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Content License: CC BY-NC 4.0](https://img.shields.io/badge/Content%20License-CC%20BY--NC%204.0-lightgrey.svg)](LICENSE)
+[![Code License: MIT](https://img.shields.io/badge/Code%20License-MIT-blue.svg)](LICENSE)
 [![n8n Compatibility](https://img.shields.io/badge/n8n-2.x%20%7C%203.x-orange.svg)](https://n8n.io)
 [![GitBook](https://img.shields.io/badge/Format-GitBook%20Best%20Practices-blueviolet.svg)](https://www.gitbook.com)
 [![Docker](https://img.shields.io/badge/Deploy-Docker%20Compose-2496ED.svg)](https://docs.docker.com)
@@ -104,3 +105,22 @@ flowchart LR
 - 每個專章均包含**核心理論解析**、**交互式圖解（Mermaid）**、**節點配置參數表**以及**可複制的代碼區塊**。
 - 若您看到帶有 `{% hint %}` 或 `> [!NOTE]` 的提示塊，代表該處為官方文檔中極易踩坑的關鍵細節，請特別留意。
 - 您可以點擊左側目錄循序漸進閱讀，亦可透過右上角搜尋框快速檢索具體節點或錯誤代碼。
+
+---
+
+## 📄 授權條款 (License)
+
+> 本作品內容由 AI 輔助全面生成，並由專案發起人進行架構設計與彙整發布。本作品採用 創用 CC 姓名標示-非商業性 4.0 國際授權條款 (CC BY-NC 4.0) 與 MIT 授權條款釋出。
+
+本書採用**雙授權（Dual-Licensing）模式**：
+- **電子書與教學內容**：採用 [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hant)（創用 CC 姓名標示-非商業性 4.0 國際授權條款）釋出。歡迎自由閱讀、分享與非商業改作，但**未經原作者書面授權，嚴禁任何形式之商業營利、付費轉載或集結出版**。
+- **範例代碼、工作流程與配置**：位於 [`workflows/`](workflows)、[`docker/`](docker) 與 [`scripts/`](scripts) 中之程式碼及設定檔，均採用寬鬆的 [MIT License](LICENSE) 授權，讀者可自由在個人或企業內部專案中無痛引用與部署。
+
+### ⚠️ 免責與商標聲明
+- **技術免責**：本作品包含之配置參數與代碼範例僅供學習參考，投入生產環境前請務必於沙盒環境充分測試。作者與貢獻者不承擔任何直接或間接之營運或業務損失責任。
+- **商標聲明**：`n8n` 為 n8n GmbH 之註冊商標。本書為社群獨立維護之開源學習手冊，非 n8n 官方贊助、附屬或背書之專案。
+
+### 📖 引用本手冊 (Citation)
+若您在文章、教材或專案中引用本書內容，請依 CC 規範標註出處：
+> Cosmo Chang, *n8n 2026 全方位實戰指南：從零基礎入門到企業級 AI Agent 自動化編排*, 2026. GitHub: https://github.com/cosmo-chang-1701/n8n-beginner-guide
+
